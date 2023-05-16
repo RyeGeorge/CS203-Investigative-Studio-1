@@ -1,13 +1,63 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
+{% extends "base.html" %} {% block title %}Home{% endblock %} 
 
-<div class="card">
-    <img src="/website/static/blast-dash-img.jpg" alt="Blast and Dash Image">
+
+
+{% block head %}
+
+<style>
+
+#backgroundVideo {
+  position: absolute;
+  z-index: -100;
+}
+
+#mainBTN {
+  height: 1080px;
+  width: auto;
+
+  margin:auto;
+}
+
+#center-item {
+  display: inline;
+  float: none;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  #backgroundVideo {
+    width: 100%;
+    height: auto;
+  }
+}
+@media (max-aspect-ratio: 16/9) {
+  #backgroundVideo {
+    width: auto;
+    height: 100%;
+  }
+}
+
+</style>
+
+{% endblock %}
+
+{% block background %}
+
+<video autoplay muted loop id = "backgroundVideo" src="/static/Blast and Dash BG.mp4" type="video/mp4"></video>
+
+{% endblock %}
+
+{% block content %}
+
+
+<div id="mainBTN">
+  <div class="d-flex justify-content-center align-items-center">
+    <h3 class="text-light">Download The Game!</h3>
+  </div>
   
-    <div class="card-body">
-      <h5 class="card-title">Blast and Dash</h5>
-      <p class="card-text">You have made it to the website providing the best game ever!</p>
-      <a href="/game" class="btn btn-primary">Download - Blast and Dash</a>
-    </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <a href="/game" class="btn btn-primary">Download</a>
+  </div>
 </div>
+
   
 {% endblock %}
