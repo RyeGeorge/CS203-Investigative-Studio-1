@@ -1,9 +1,50 @@
-{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
-    %}
+{% extends "base.html" %} {% block title %}Login{% endblock %} 
+
+{% block head %}
+<style>
+
+  #backgroundVideo {
+    position: absolute;
+    z-index: -100;
+  }
+
+  #center-item {
+    display: inline;
+    float: none;
+  }
+
+  #mainBTN {
+    height: 1080px;
+    width: auto;
+  
+    margin:auto;
+  }
+
+  @media (min-aspect-ratio: 16/9) {
+    #backgroundVideo {
+      width: 100%;
+      height: auto;
+    }
+
+  form {
+    align-content: center;
+    margin: auto;
+    width: 60%;
+  }  
+}
+</style>
+{% endblock %}
+
+{% block background %}
+<video autoplay muted loop id = "backgroundVideo" src="/static/Blast and Dash BG.mp4" type="video/mp4"></video>
+{% endblock %}
+
+{% block content %}
     <form method="POST">
-      <h3 align="center">Login</h3>
+      <h3 class="text-light" align="center">Login</h3>
+
       <div class="form-group">
-        <label for="email">Email Address</label>
+        <label class="text-light" for="email">Email Address</label>
         <input
           type="email"
           class="form-control"
@@ -13,7 +54,7 @@
         />
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label class="text-light" for="password">Password</label>
         <input
           type="password"
           class="form-control"
@@ -23,6 +64,8 @@
         />
       </div>
       <br />
-      <button type="submit" class="btn btn-primary">Login</button>
+      <div align="center">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
     </form>
-    {% endblock %}
+{% endblock %}
