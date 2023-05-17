@@ -20,11 +20,9 @@
 
     <title>{% block title %} {% endblock %}</title>
 
-    {% block head %}
-
-    {% endblock %}
-    </style>
+    {% block head %} {% endblock %}
   </head>
+
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <button
@@ -68,11 +66,39 @@
     </div>
     {% endif %} {% endfor %} {% endif %} {% endwith %}
 
-    {% block background %}
+    {% block background %} {% endblock %} <!--Block to change background on page if required-->
 
-    {% endblock %}
+    <div class="container">{% block content %} {% endblock %}</div> <!--Block for main page content-->
 
-    <div class="container">{% block content %} {% endblock %}</div>
+ 
+    <div class="my-5">
+
+      <footer class="text-center text-lg-start" style="background-color: #db6930;">
+        <div class="container d-flex justify-content-center py-5">
+          <button onclick="location.href='http://www.facebook.com'" type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
+            <i class="fa fa-facebook-f"></i>
+          </button>
+          <button onclick="location.href='http://www.youtube.com'" type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
+            <i class="fa fa-youtube"></i>
+          </button>
+          <button onclick="location.href='http://www.instagram.com'" type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
+            <i class="fa fa-instagram"></i>
+          </button>
+          <button onclick="location.href='http://www.twitter.com'" type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
+            <i class="fa fa-twitter"></i>
+          </button>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2020 Copyright:
+          <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+  
+    </div>
+      
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
