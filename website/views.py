@@ -31,7 +31,7 @@ def home():
 @views.route('/download')
 @login_required
 def download():
-    path = 'static\Blast and Dash.rar' # the path of the file to download
+    path = 'static\Blast and Dash.zip' # the path of the file to download
     return send_file(path, as_attachment=True) # download the file
 
 @views.route('/delete-note', methods=['POST'])
