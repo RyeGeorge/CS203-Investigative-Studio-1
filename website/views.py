@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, send_file
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
@@ -10,7 +10,12 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-    if request.method == 'POST': 
+    if request.method == 'POST':
+        return redirect('/')
+    else:
+        return render_template("home.html", user=current_user)
+
+    """if request.method == 'POST': 
         note = request.form.get('note')#Gets the note from the HTML 
 
         if len(note) < 1:
@@ -20,9 +25,14 @@ def home():
             db.session.add(new_note) #adding the note to the database 
             db.session.commit()
             flash('Note added!', category='success')
-
-    return render_template("home.html", user=current_user)
-
+    
+    """
+    
+@views.route('/download')
+@login_required
+def download():
+    path = 'static\Blast and Dash.rar' # the path of the file to download
+    return send_file(path, as_attachment=True) # download the file
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():  
@@ -39,3 +49,9 @@ def delete_note():
 @views.route('/forum', methods=['GET', 'POST'])
 def forum():
     return render_template('forum.html', user=current_user)
+
+@views.route('/game')
+@login_required
+def game():
+    return render_template('game.html', user=current_user)
+
