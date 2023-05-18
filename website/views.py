@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify, session
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, send_file
 from flask_login import login_required, current_user
 from .models import Note, Post, Comment
 from . import db
@@ -9,8 +9,13 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-    if request.method == 'POST': 
-        note = request.form.get('note')
+    if request.method == 'POST':
+        return redirect('/')
+    else:
+        return render_template("home.html", user=current_user)
+
+    """if request.method == 'POST': 
+        note = request.form.get('note')#Gets the note from the HTML 
 
         if len(note) < 1:
             flash('Note is too short!', category='error') 
@@ -19,9 +24,14 @@ def home():
             db.session.add(new_note) #adding the note to the database 
             db.session.commit()
             flash('Note added!', category='success')
-
-    return render_template("home.html", user=current_user)
-
+    
+    """
+    
+@views.route('/download')
+@login_required
+def download():
+    path = 'static\Blast and Dash.rar' # the path of the file to download
+    return send_file(path, as_attachment=True) # download the file
 
 
 @views.route('/delete-note', methods=['POST'])

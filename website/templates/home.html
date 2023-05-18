@@ -7,20 +7,73 @@
 <style>
 
 #backgroundVideo {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 200px;
+  object-fit: cover;
+  z-index: -1;
+}
+
+
+#home-btn {
+  margin: 10px;
+}
+
+
+.bg-container {
+  height: 640px;
+  z-index: 100;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.main-header {
+  color: whitesmoke;
+
   position: absolute;
-  z-index: -100;
+  bottom: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  transform: translateZ(50%)
 }
 
-#mainBTN {
-  height: 1080px;
-  width: auto;
-
-  margin:auto;
+.section {
+  margin-top: 50px;
+  height: 640px;
+  background-color: red;
+  width: 100%;
 }
 
-#center-item {
-  display: inline;
-  float: none;
+body{
+  background-color: #33323d;
+}
+
+h1{
+  font-size: 52px;
+  color: whitesmoke;
+}
+
+h2{
+  font-size: 48px;
+  color: whitesmoke;
+}
+
+p{
+  font-size: 24px;
+  color: whitesmoke;
+}
+
+
+.btn-container{
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  transform: translateZ(50%)
+}
+
+#about {
+  margin-top: 50px;
 }
 
 @media (min-aspect-ratio: 16/9) {
@@ -42,22 +95,38 @@
 
 {% block background %}
 
-<video autoplay muted loop id = "backgroundVideo" src="/static/Blast and Dash BG.mp4" type="video/mp4"></video>
+<div class="bg-container d-flex justify-content-center align-items-center">
+
+  <h1 class="main-header">Play The Game!</h1>
+
+  <div class="d-flex btn-container">
+    <a href="/game" id="home-btn" class="btn-primary btn-lg">Play Game</a>
+    
+    <a href="/download" id="home-btn" class="btn-primary btn-lg">Download</a>
+
+  </div>
+
+  <video autoplay muted loop id = "backgroundVideo" src="/static/Blast and Dash BG.mp4" type="video/mp4"></video>
+</div>
+
+
 
 {% endblock %}
 
 {% block content %}
 
+<div id="about" class="contianer">
+  <h1 class="text-center">About The Game</h1>
 
-<div id="mainBTN">
-  <div class="d-flex justify-content-center align-items-center">
-    <h3 class="text-light">Download The Game!</h3>
+  <p>Blast and Dash is a fast-paced 2D platformer where you takes on the role of a pirate who has been stranded on a deserted island.  
+    You must use your various abilities to traverse the island and find the four torn map pieces in order to escape the island.
+    But it won’t be easy as there are many dangers on the island.  you must defeat their enemies and avoid the numerous traps in order to leave the island.
+  </p>
+
+  <div class="section">
+    <h2>The Shotgun</h2>
   </div>
-  
-  <div class="d-flex justify-content-center align-items-center">
-    <a href="/game" class="btn btn-primary">Download</a>
-  </div>
+
 </div>
-
   
 {% endblock %}
