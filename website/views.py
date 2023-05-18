@@ -1,17 +1,16 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, jsonify, session
 from flask_login import login_required, current_user
-from .models import Note
+from .models import Note, Post, Comment
 from . import db
 import json
 
 views = Blueprint('views', __name__)
 
-
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
     if request.method == 'POST': 
-        note = request.form.get('note')#Gets the note from the HTML 
+        note = request.form.get('note')
 
         if len(note) < 1:
             flash('Note is too short!', category='error') 
@@ -22,6 +21,7 @@ def home():
             flash('Note added!', category='success')
 
     return render_template("home.html", user=current_user)
+
 
 
 @views.route('/delete-note', methods=['POST'])
@@ -37,5 +37,37 @@ def delete_note():
     return jsonify({})
 
 @views.route('/forum', methods=['GET', 'POST'])
+@login_required
 def forum():
+    if request.method == 'POST': 
+        submit_button = request.form.get('submit_button')
+
+        if submit_button == 'post_btn':
+            post = request.form.get('post')
+            title = request.form.get('title')
+
+            if len(post) < 1:
+                flash('Post is too short!', category='error') 
+            else:
+                new_post = Post(content=post, title=title, user_id=current_user.id)  #providing the schema for the post 
+                db.session.add(new_post) #adding the post to the database 
+                db.session.commit()
+                flash('Post added!', category='success')
+
+        elif submit_button == 'comment_btn':
+            comment = request.form.get('comment')
+
+            if len(comment) < 1:
+                flash('Comment is too short!', category='error') 
+            else:
+                new_comment = Comment(content=comment, user_id=current_user.id)  #providing the schema for the post 
+                db.session.add(new_comment) #adding the comment to the database 
+                db.session.commit()
+                flash('Comment added!', category='success')
+
     return render_template('forum.html', user=current_user)
+
+@views.route('/game', methods=['GET', 'POST'])
+@login_required
+def game():
+    return render_template('game.html', user=current_user)
