@@ -1,7 +1,62 @@
-{% extends 'base.html' %}  
- 
+{% extends 'base.html' %}  {% block title %}Forum{% endblock %}
+
 {% block content %}  
- 
-  <h1> Welcome to the forum </h1>  
- 
+ <body>
+  <h1 align="center">Forum</h1>  
+  <button id="scrollButton" class="btn btn-link">Create a Post</button>
+  <ul class="list-group list-group-flush" id="posts">
+    {% for post in user.posts %}
+    <li class="list-group-item ">
+      <h5>{{ post.title }}</h5>
+      <small>{{ post.created }}</small>
+    </li>
+    <li class="list-group-item">
+      {{ post.content }}
+    </li>
+    <div align="center">
+      <button id="toggleButton" class="btn btn-secondary">Comment</button>
+      <div id="textAreaContainer" style="display: none;">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <form method="POST">
+                <textarea name="comment" id="comment" rows="3" class="form-control"></textarea>
+                <button type="submit" name="submit_button" value="comment_btn" class="btn-sm">Submit</button>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    {% endfor %} 
+  </ul>
+  <br />
+  <h3 id="targetHeading" align="center">Create a Post</h3>
+  <form method="POST">
+    <textarea placeholder="Title" name="title" id="title" class="form-control"></textarea>
+    <textarea placeholder="Post content" name="post" id="post" class="form-control"></textarea>
+    <br />
+    <div align="center">
+      <button type="submit" name="submit_button" value="post_btn" class="btn btn-primary">Add Post</button>
+    </div>
+  </form>
+
+  <script> 
+  //function to toggle the text area for 'Comment'- on and off
+    $(document).ready(function() {
+      $('#toggleButton').click(function() {
+        $('#textAreaContainer').toggle();
+      });
+    });
+  </script>
+
+  <script>
+    //function to scroll to heading on button click 
+    document.getElementById("scrollButton").addEventListener("click", function() {
+      var targetHeading = document.getElementById("targetHeading");
+      targetHeading.scrollIntoView({ behavior: "smooth" });
+    });
+  </script>
+
+</body>
 {% endblock %} 

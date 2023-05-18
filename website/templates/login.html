@@ -6,6 +6,10 @@
   #backgroundVideo {
     position: absolute;
     z-index: -100;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    top: 0px;
   }
 
   #center-item {
@@ -20,29 +24,24 @@
     margin:auto;
   }
 
-  @media (min-aspect-ratio: 16/9) {
-    #backgroundVideo {
-      width: 100%;
-      height: auto;
-    }
-
   form {
     align-content: center;
     margin: auto;
     width: 60%;
   }  
-}
+
 </style>
 {% endblock %}
 
 {% block background %}
-<video autoplay muted loop id = "backgroundVideo" src="/static/Blast and Dash BG.mp4" type="video/mp4"></video>
 {% endblock %}
 
 {% block content %}
+<div>
+  <video autoplay muted loop id = "backgroundVideo" src="/static/Blast and Dash BG.mp4" type="video/mp4"></video>
+</div>
     <form method="POST">
       <h3 class="text-light" align="center">Login</h3>
-
       <div class="form-group">
         <label class="text-light" for="email">Email Address</label>
         <input
@@ -68,4 +67,5 @@
         <button type="submit" class="btn btn-primary">Login</button>
       </div>
     </form>
+
 {% endblock %}
