@@ -1,9 +1,26 @@
 {% extends "base.html" %} {% block title %}Game{% endblock %} 
 
+{% block head %}
+
+<style>
+    .game{
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+{% endblock %}
+
 {% block content %}
 
-<iframe mozallowfullscreen="true" allow="autoplay; fullscreen" src="/static/Web Build/index.html" 
-style="border:0px #000000 none;" name="Pong: Star Wars Remix" scrolling="no" msallowfullscreen="true" allowfullscreen="true" 
-webkitallowfullscreen="true" allowtransparency="true" frameborder="0" marginheight="540" marginwidth="960" height="540px" width="960px"></iframe>
+<div class="game">
+
+    <iframe  mozallowfullscreen="true" allow="autoplay; fullscreen" src="/static/Web Build/index.html" 
+    style="border:0px #000000 none;" name="Pong: Star Wars Remix" scrolling="no" msallowfullscreen="true" allowfullscreen="true" 
+    webkitallowfullscreen="true" allowtransparency="true" frameborder="0" height="720px" width="1280px"></iframe>
+
+</div>
 
 {% endblock %}
