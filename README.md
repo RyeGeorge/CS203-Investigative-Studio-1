@@ -14,3 +14,5 @@ Users can create an account with the website
 Users can post to the forum and read posts from other users.
 ## Game page
 Users can play the game.
+## Profile Page
+Displays the current users information
