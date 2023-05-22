@@ -77,6 +77,11 @@ def forum():
 
     return render_template('forum.html', user=current_user)
 
+@views.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html', user=current_user)
+
 @views.route('/game', methods=['GET', 'POST'])
 @login_required
 def game():
