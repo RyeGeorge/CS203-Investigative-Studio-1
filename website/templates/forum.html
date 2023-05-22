@@ -2,11 +2,11 @@
 
 {% block content %}  
  <body>
-  <h1 align="center">Forum</h1>  
+  <!--<h1 align="center">Forum</h1>  
   <button id="scrollButton" class="btn btn-link">Create a Post</button>
   <ul class="list-group list-group-flush" id="posts">
     {% for post in user.posts %}
-    <li class="list-group-item ">
+    <li class="list-group-item">
       <h5>{{ post.title }}</h5>
       <small>{{ post.created }}</small>
     </li>
@@ -27,6 +27,9 @@
         </div>
       </div>
     </div>
+    <li class="list-group-item">
+      
+    </li>
     <br />
     {% endfor %} 
   </ul>
@@ -39,16 +42,39 @@
     <div align="center">
       <button type="submit" name="submit_button" value="post_btn" class="btn btn-primary">Add Post</button>
     </div>
-  </form>
+  </form>-->
 
-  <script> 
-  //function to toggle the text area for 'Comment'- on and off
-    $(document).ready(function() {
-      $('#toggleButton').click(function() {
-        $('#textAreaContainer').toggle();
-      });
-    });
-  </script>
+  <div>
+    <h1>Forum</h1>
+
+    <form method="POST" action="{{ url_for('views.forum') }}">
+        <h2>Create a new post</h2>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+        <label for="content">Content:</label><br>
+        <textarea id="content" name="content" rows="4" cols="50" required></textarea><br><br>
+        <input type="submit" value="Create Post">
+    </form>
+
+    <h2>All Posts</h2>
+    {% for post in posts %}
+        <div>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.content }}</p>
+
+            <form method="POST" action="{{ url_for('views.create_comment', post_id=post.id) }}">
+                <label for="comment">Add a comment:</label><br>
+                <textarea id="comment" name="comment" rows="2" cols="40" required></textarea>
+                <input type="submit" value="Add Comment">
+            </form>
+
+            <h4>Comments</h4>
+            {% for comment in post.comments %}
+                <p>{{ comment.content }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+  </div>
 
   <script>
     //function to scroll to heading on button click 
@@ -58,5 +84,21 @@
     });
   </script>
 
+  <script>
+    //function to toggle text area visibility
+    document.addEventListener('DOMContentLoaded', function() {
+      var toggleButton = document.getElementById('toggleButton');
+      var textAreaContainer = document.getElementById('textAreaContainer');
+      
+      toggleButton.addEventListener('click', function() {
+        if (textAreaContainer.style.display === 'none') {
+          textAreaContainer.style.display = 'block';
+        } else {
+          textAreaContainer.style.display = 'none';
+        }
+      });
+    });
+  </script>
+  
 </body>
 {% endblock %} 
