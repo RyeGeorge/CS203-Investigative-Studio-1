@@ -14,30 +14,30 @@
       {{ post.content }}
     </li>
     <li class="list-group-item">
-      {{ post.user_id}}
+      User ID: {{ post.user_id}}
     </li>
     <li class="list-group-item">
-      {{ post.id}}
+      Post ID: {{ post.id}}
     </li>
-    <form method="POST" action="{{ url_for('views.create_comment', post_id=post.id) }}">
+    <!--<form method="POST" action="{{ url_for('views.create_comment', post_id=post.id) }}">
       <label for="comment">Add a comment:</label><br>
       <textarea id="comment" name="comment" rows="2" cols="40" required></textarea>
       <input type="submit" value="Add Comment">
-    </form>
-    <!--<div align="center">
-      <button id="toggleButton" class="btn btn-secondary">Comment</button>
+    </form>-->
+    <div align="center">
+      <button id="toggleButton" class="btn btn-secondary toggleButton">Comment</button>
       <div id="textAreaContainer" style="display: none;">
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-              <form method="POST">
-                <textarea name="comment" id="comment" rows="3" class="form-control"></textarea>
+              <form method="POST" action="{{ url_for('views.create_comment', post_id=post.id) }}">
+                <textarea name="comment" id="comment" rows="3" class="form-control textAreaContainer"></textarea>
                 <button type="submit" name="submit_button" value="comment_btn" class="btn-sm">Submit</button>
               </form>
             </div>
         </div>
       </div>
-    </div>-->
+    </div>
     <br />
     {% endfor %} 
   </ul>
@@ -86,7 +86,7 @@
     });
   </script>
 
-  <script>
+  <!--<script>
     //function to toggle text area visibility
     document.addEventListener('DOMContentLoaded', function() {
       var toggleButton = document.getElementById('toggleButton');
@@ -100,7 +100,20 @@
         }
       });
     });
-  </script>
+  </script>-->
   
+  <script>
+    // Function to toggle the textarea for each button
+    document.addEventListener("DOMContentLoaded", function() {
+      const toggleButtons = document.querySelectorAll(".toggleButton");
+      toggleButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+          const textArea = button.nextElementSibling;
+          textArea.style.display = (textArea.style.display === "none") ? "block" : "none";
+        });
+      });
+    });
+  </script>
+
 </body>
 {% endblock %} 
