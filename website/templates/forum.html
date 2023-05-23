@@ -2,16 +2,22 @@
 
 {% block content %}  
  <body>
-  <!--<h1 align="center">Forum</h1>  
+  <h1 align="center">Forum</h1>  
   <button id="scrollButton" class="btn btn-link">Create a Post</button>
   <ul class="list-group list-group-flush" id="posts">
-    {% for post in user.posts %}
+    {% for post in posts %}
     <li class="list-group-item">
       <h5>{{ post.title }}</h5>
       <small>{{ post.created }}</small>
     </li>
     <li class="list-group-item">
       {{ post.content }}
+    </li>
+    <li class="list-group-item">
+      {{ post.user_id}}
+    </li>
+    <li class="list-group-item">
+      {{ post.id}}
     </li>
     <div align="center">
       <button id="toggleButton" class="btn btn-secondary">Comment</button>
@@ -27,9 +33,6 @@
         </div>
       </div>
     </div>
-    <li class="list-group-item">
-      
-    </li>
     <br />
     {% endfor %} 
   </ul>
@@ -42,9 +45,9 @@
     <div align="center">
       <button type="submit" name="submit_button" value="post_btn" class="btn btn-primary">Add Post</button>
     </div>
-  </form>-->
+  </form>
 
-  <div>
+  <!--<div>
     <h1>Forum</h1>
 
     <form method="POST" action="{{ url_for('views.forum') }}">
@@ -60,21 +63,14 @@
     {% for post in posts %}
         <div>
             <h3>{{ post.title }}</h3>
+            <p>{{ post.created}}</p>
             <p>{{ post.content }}</p>
+            <p>{{ post.user_id}}</p>
+            <p>{{ post.id}}</p>
 
-            <form method="POST" action="{{ url_for('views.create_comment', post_id=post.id) }}">
-                <label for="comment">Add a comment:</label><br>
-                <textarea id="comment" name="comment" rows="2" cols="40" required></textarea>
-                <input type="submit" value="Add Comment">
-            </form>
-
-            <h4>Comments</h4>
-            {% for comment in post.comments %}
-                <p>{{ comment.content }}</p>
-            {% endfor %}
         </div>
     {% endfor %}
-  </div>
+  </div>-->
 
   <script>
     //function to scroll to heading on button click 

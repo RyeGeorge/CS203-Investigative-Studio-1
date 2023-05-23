@@ -9,7 +9,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     posts = db.relationship('Post')
-    comments = db.relationship('Comment')
+    #comments = db.relationship('Comment')
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -17,12 +17,12 @@ class Post(db.Model):
     title= db.Column(db.String(100))
     content= db.Column(db.String(10000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    comments = db.relationship('Comment', backref='post', lazy='dynamic') #creates relationship with comment table 
+    #comments = db.relationship('Comment', backref='post', lazy='dynamic') #creates relationship with comment table 
     #backref creates a back-reference to access Comment table, allowing to access Post object through a Comment object
     
-class Comment(db.Model):
+"""class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     created = db.Column(db.DateTime(timezone=True), default=func.now())
     content= db.Column(db.String(10000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))"""

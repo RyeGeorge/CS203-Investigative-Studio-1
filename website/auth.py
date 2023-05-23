@@ -18,7 +18,7 @@ def login():
         #... match found as there should be no duplicates.
         if user:
             if check_password_hash(user.password, password): #check password correct using password hashes
-                flash('Logged in successfully!', category='success')
+                flash('Logged in successfully!' + str(user), category='success')
                 login_user(user, remember=True) #login user and remember them for this session
                 return redirect(url_for('views.home'))
             else:
