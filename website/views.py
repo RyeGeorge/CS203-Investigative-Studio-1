@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, send_file
 from flask_login import login_required, current_user
-from .models import Post, User
+from .models import Post, User, Comment
 from . import db
 import json
 
@@ -9,6 +9,8 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+
+    print(current_user)
     # Print all data from the Post table
     users = User.query.all()
     for user in users:
@@ -40,15 +42,18 @@ def download():
 @views.route('/forum', methods=['GET', 'POST'])
 @login_required
 def forum():
+    print("Current user" + str(current_user)) #check if current user working
+
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['post']
-        new_post = Post(title=title, content=content)
+        new_post = Post(title=title, content=content, user_id=current_user.id)
         db.session.add(new_post)
         db.session.commit()
 
     posts = Post.query.all()
     return render_template('forum.html', posts=posts, user=current_user)
+
 """ if request.method == 'POST': 
         submit_button = request.form.get('submit_button')
 
@@ -79,16 +84,17 @@ def forum():
     return render_template('forum.html', user=current_user)"""
 
 
-"""@views.route('/post/<int:post_id>/comment', methods=['POST'])
+@views.route('/post/<int:post_id>/comment', methods=['POST'])
 @login_required
 def create_comment(post_id):
+    print(post_id) #check post_id working
     comment_content = request.form['comment']
-    post = Post.query.get(post_id)
-    new_comment = Comment(content=comment_content, post=post, user_id=current_user.id)
+    post = post_id
+    new_comment = Comment(content=comment_content, post_id=post_id)
     db.session.add(new_comment)
     db.session.commit()
 
-    return redirect('/forum', user=current_user)"""
+    return redirect('/forum', user=current_user)
 
 @views.route('/game', methods=['GET', 'POST'])
 @login_required

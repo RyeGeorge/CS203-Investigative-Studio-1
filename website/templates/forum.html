@@ -19,7 +19,12 @@
     <li class="list-group-item">
       {{ post.id}}
     </li>
-    <div align="center">
+    <form method="POST" action="{{ url_for('views.create_comment', post_id=post.id) }}">
+      <label for="comment">Add a comment:</label><br>
+      <textarea id="comment" name="comment" rows="2" cols="40" required></textarea>
+      <input type="submit" value="Add Comment">
+    </form>
+    <!--<div align="center">
       <button id="toggleButton" class="btn btn-secondary">Comment</button>
       <div id="textAreaContainer" style="display: none;">
         <div class="row">
@@ -32,7 +37,7 @@
             </div>
         </div>
       </div>
-    </div>
+    </div>-->
     <br />
     {% endfor %} 
   </ul>
@@ -47,7 +52,8 @@
     </div>
   </form>
 
-  <!--<div>
+
+<!--  <div>
     <h1>Forum</h1>
 
     <form method="POST" action="{{ url_for('views.forum') }}">
