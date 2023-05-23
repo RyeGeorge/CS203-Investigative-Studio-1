@@ -7,6 +7,33 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
+@auth.route('/update-password', methods=['GET', 'POST'])
+@login_required
+def update_password():
+
+    if request.method == 'POST':
+        password = request.form.get('current_password')
+        email = request.form.get('email')
+        user_query = User.query.filter_by(email=email)
+        user = user_query.first()
+        if user:
+            if check_password_hash(user.password, password):
+                new_password1 = request.form.get('new_password1')
+                new_password2 = request.form.get('new_password2')
+
+                if new_password1 == new_password2:
+                    user.password = generate_password_hash(new_password1, method='sha256')
+
+                    flash('Password updated successfully!', category='success')
+                    return redirect('/profile') 
+                else:
+                    flash('New passwords dont match, try again.', category='error') #will flash password error
+            else:
+               flash('Current password incorrect, try again.', category='error') #will flash password error
+        else:
+            flash('Email does not exist.', category='error') #will flash email error
+    return render_template('password_update.html', user=current_user)
+
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():

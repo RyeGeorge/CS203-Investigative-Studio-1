@@ -6,25 +6,25 @@
 
 <div class="container">
 
-    <div">
+    <li class="list-group-item"> 
+        <p class="text-left"> 
+          <span class="badge badge-pill badge-primary">First Name</span> 
+        </p> 
+        <p class="text-left">{{user.first_name}}</p> 
 
-        <div>
-            <li class="list-group-item list-group-horizontal">
-                <p class="text-left">First Name</p>
+        <p class="text-left"> 
+            <span class="badge badge-pill badge-primary">Email</span> 
+        </p> 
+        <p class="text-left">{{user.email}}</p> 
 
-                <p class="text-center">Rye</p>
-            </li>
-        </div>
-
-        <div>
-            <li class="list-group-item d-flex">
-                <p class="text-left">Last Name</p>
-
-                <p class="text-center">George</p>
-            </li>
-        </div>
-
-    </div>
+        <p class="text-left"> 
+            <span class="badge badge-pill badge-primary">Password</span> 
+        </p> 
+        <p class="text-left">      
+            {{user.password}}
+            <a href="/update-password">Update</a>
+        </p> 
+    </li> 
 
 </div>
 
