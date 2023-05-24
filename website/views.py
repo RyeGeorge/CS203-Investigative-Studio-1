@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, request, flash, jsonify, redirect,
 from flask_login import login_required, current_user
 from .models import Post, User, Comment
 from . import db
-import json
 
 views = Blueprint('views', __name__)
 
@@ -47,7 +46,8 @@ def forum():
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['post']
-        new_post = Post(title=title, content=content, user_id=current_user.id)
+        user_name = current_user.first_name
+        new_post = Post(title=title, content=content, user_id=current_user.id, user_name=user_name)
         db.session.add(new_post)
         db.session.commit()
 
@@ -87,14 +87,14 @@ def forum():
 @views.route('/post/<int:post_id>/comment', methods=['POST'])
 @login_required
 def create_comment(post_id):
-    print(post_id) #check post_id working
+    print("Post ID:" + str(post_id)) #check post_id working
     comment_content = request.form['comment']
-    post = post_id
-    new_comment = Comment(content=comment_content, post_id=post_id)
+    user_name = current_user.first_name
+    new_comment = Comment(content=comment_content, post_id=post_id, user_name=user_name) #providing the schema for the post
     db.session.add(new_comment)
     db.session.commit()
 
-    return redirect('/forum', user=current_user)
+    return redirect('/forum')
 
 @views.route('/game', methods=['GET', 'POST'])
 @login_required

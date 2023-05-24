@@ -2,28 +2,39 @@
 
 {% block content %}  
  <body>
+
   <h1 align="center">Forum</h1>  
   <button id="scrollButton" class="btn btn-link">Create a Post</button>
   <ul class="list-group list-group-flush" id="posts">
     {% for post in posts %}
     <li class="list-group-item">
-      <h5>{{ post.title }}</h5>
-      <small>{{ post.created }}</small>
+      <div class="row">
+        <div class="col-md-9">
+          <h5>{{ post.title }}</h5>
+          <small>  - written by {{ post.user_name }}</small>
+        </div>
+        <div class="col-md-3">
+          <small>{{ post.created }}</small>
+        </div>
+      </div>
     </li>
     <li class="list-group-item">
       {{ post.content }}
     </li>
     <li class="list-group-item">
-      User ID: {{ post.user_id}}
+      <h6 align="center">Comments</h6>
+        <ul class="list-group list-group-flush" id="comments">
+          {% for comment in post.comments %}
+            <div class="row">
+              <div class="col-md-4"></div>
+              <li class="col-md-5">
+                <small>{{ comment.user_name }}: {{ comment.content }}</small>
+              </li>
+            </div>
+          {% endfor %}
+        </ul>
     </li>
-    <li class="list-group-item">
-      Post ID: {{ post.id}}
-    </li>
-    <!--<form method="POST" action="{{ url_for('views.create_comment', post_id=post.id) }}">
-      <label for="comment">Add a comment:</label><br>
-      <textarea id="comment" name="comment" rows="2" cols="40" required></textarea>
-      <input type="submit" value="Add Comment">
-    </form>-->
+
     <div align="center">
       <button id="toggleButton" class="btn btn-secondary toggleButton">Comment</button>
       <div id="textAreaContainer" style="display: none;">
