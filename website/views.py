@@ -1,14 +1,31 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, send_file
 from flask_login import login_required, current_user
-from .models import Post, Comment
+from .models import Post, User, Comment
 from . import db
-import json
 
 views = Blueprint('views', __name__)
 
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+
+    print(current_user)
+    # Print all data from the Post table
+    users = User.query.all()
+    for user in users:
+        print(f"User ID: {user.id}")
+        print(f"Email: {user.email}")
+        print(f"Name: {user.first_name}")
+        print("---")
+
+    # Print all data from the Post table
+    posts = Post.query.all()
+    for post in posts:
+        print(f"Post ID: {post.id}")
+        print(f"Title: {post.title}")
+        print(f"Content: {post.content}")
+        print("---")
+
     if request.method == 'POST':
         return redirect('/')
     else:
@@ -24,15 +41,19 @@ def download():
 @views.route('/forum', methods=['GET', 'POST'])
 @login_required
 def forum():
+    print("Current user" + str(current_user)) #check if current user working
+
     if request.method == 'POST':
         title = request.form['title']
-        content = request.form['content']
-        new_post = Post(title=title, content=content)
+        content = request.form['post']
+        user_name = current_user.first_name
+        new_post = Post(title=title, content=content, user_id=current_user.id, user_name=user_name)
         db.session.add(new_post)
         db.session.commit()
 
     posts = Post.query.all()
     return render_template('forum.html', posts=posts, user=current_user)
+
 """ if request.method == 'POST': 
         submit_button = request.form.get('submit_button')
 
@@ -66,13 +87,14 @@ def forum():
 @views.route('/post/<int:post_id>/comment', methods=['POST'])
 @login_required
 def create_comment(post_id):
+    print("Post ID:" + str(post_id)) #check post_id working
     comment_content = request.form['comment']
-    post = Post.query.get(post_id)
-    new_comment = Comment(content=comment_content, post=post, user_id=current_user.id)
+    user_name = current_user.first_name
+    new_comment = Comment(content=comment_content, post_id=post_id, user_name=user_name) #providing the schema for the post
     db.session.add(new_comment)
     db.session.commit()
 
-    return redirect('/forum', user=current_user)
+    return redirect('/forum')
 
 @views.route('/profile')
 @login_required

@@ -17,10 +17,14 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet" type="text/css" href="static/styles.css"
+    />
 
     <title>{% block title %} {% endblock %}</title>
 
     {% block head %} {% endblock %}
+
   </head>
 
   <body>
@@ -68,9 +72,9 @@
 
     {% block background %} {% endblock %} <!--Block to change background on page if required-->
 
-    <div class="container">{% block content %} {% endblock %}</div> <!--Block for main page content-->
+    <div class="container my-5">{% block content %} {% endblock %}</div> <!--Block for main page content-->
 
-    <div class="my-5">
+    <div class="my-5"> <!-- footer -->
       <footer class="text-center text-lg-start" style="background-color: #db6930;">
         <div class="container d-flex justify-content-center py-5">
           <button onclick="location.href='http://www.facebook.com'" type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
@@ -113,17 +117,5 @@
       crossorigin="anonymous"
     ></script>
 
-{% block javascript %}
-    <script type="text/javascript">
-      function deleteNote(noteId) {
-    fetch("/delete-note", {
-        method: "POST",
-        body: JSON.stringify({ noteId: noteId }),
-    }).then((_res) => {
-        window.location.href = "/";
-    });
-    }
-    </script>
-{% endblock %}
   </body>
 </html>
