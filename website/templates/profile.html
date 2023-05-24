@@ -1,6 +1,17 @@
 {% extends "base.html" %} {% block title %}Profile{% endblock %} 
 
 
+
+{% block head %}
+
+<style>
+    .posts {
+        margin-top: 25px;
+    }
+</style>
+
+{% endblock %}
+
 {% block content %}
 
 
@@ -15,7 +26,10 @@
         <p class="text-left"> 
             <span class="badge badge-pill badge-primary">Email</span> 
         </p> 
-        <p class="text-left">{{user.email}}</p> 
+        <p class="text-left">
+            {{user.email}}
+            <a href="/update-email">Update</a>
+        </p> 
 
         <p class="text-left"> 
             <span class="badge badge-pill badge-primary">Password</span> 
@@ -25,7 +39,26 @@
             <a href="/update-password">Update</a>
         </p> 
     </li> 
+</div>
 
+<div class="contianer ">
+    {% for post in posts %}
+        {% if post.user_id == user.id %}
+        <li class="list-group-item posts">
+            <a href="">{{post.title}}</a>
+            <p>
+                <!--If post has more than 100 charcters display only the first 100 characters of the post-->
+                {% if post.content | length > 100 %}
+                {{ post.content[:100] | safe}}...
+                {% else %}
+                {{ post.content }}
+                {% endif %}
+            </p>
+            <span class="badge badge-pill badge-secondary">{{post.created}}</span>   
+        </li>
+        {% endif %}
+    {% endfor %}
+    
 </div>
 
 {% endblock %}
