@@ -7,6 +7,55 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
+@auth.route('/update-password', methods=['GET', 'POST'])
+@login_required
+def update_password():
+
+    if request.method == 'POST':
+        password = request.form.get('current_password')
+        email = request.form.get('email')
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if check_password_hash(user.password, password):
+                new_password1 = request.form.get('new_password1')
+                new_password2 = request.form.get('new_password2')
+
+                if new_password1 == new_password2:
+                    user.password = generate_password_hash(new_password1, method='sha256')
+                    db.session.commit()
+
+                    flash('Password updated successfully!', category='success')
+                    return redirect('/profile') 
+                else:
+                    flash('New passwords dont match, try again.', category='error') #will flash password error
+            else:
+               flash('Current password incorrect, try again.', category='error') #will flash password error
+        else:
+            flash('Email does not exist, try again.', category='error') #will flash email error
+    return render_template('password_update.html', user=current_user)
+
+
+@auth.route('/update-email', methods=['Get', 'POST'])
+@login_required
+def update_email():
+    if request.method == 'POST':
+        current_email = request.form.get('current_email')
+        user = User.query.filter_by(email=current_email).first()
+
+        if user:
+            password = request.form.get('password')
+            if check_password_hash(user.password, password):
+                new_email = request.form.get('new_email')
+                user.email = new_email
+                db.session.commit()
+                return redirect('/profile')
+            else:
+                flash('Incorrect password, try again.', category='error') #will flash password error
+        else:
+            flash('Email does not exist.', category='error') #will flash email error
+
+    return render_template('email_update.html', user=current_user)
+
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():

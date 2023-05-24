@@ -99,7 +99,8 @@ def create_comment(post_id):
 @views.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html', user=current_user)
+    posts = Post.query.all()
+    return render_template('profile.html', user=current_user, posts=posts)
 
 @views.route('/game', methods=['GET', 'POST'])
 @login_required
