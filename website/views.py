@@ -8,10 +8,9 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-
-    print(current_user)
-    # Print all data from the Post table
-    users = User.query.all()
+    #print(current_user) # print current user for testing purposes
+    # Print all data from the Post table for testing purposes
+    """users = User.query.all()
     for user in users:
         print(f"User ID: {user.id}")
         print(f"Email: {user.email}")
@@ -24,7 +23,7 @@ def home():
         print(f"Post ID: {post.id}")
         print(f"Title: {post.title}")
         print(f"Content: {post.content}")
-        print("---")
+        print("---")"""
 
     if request.method == 'POST':
         return redirect('/')
@@ -38,6 +37,7 @@ def download():
     path = 'static\Blast and Dash.zip' # the path of the file to download
     return send_file(path, as_attachment=True) # download the file
 
+
 @views.route('/forum', methods=['GET', 'POST'])
 @login_required
 def forum():
@@ -47,41 +47,21 @@ def forum():
         title = request.form['title']
         content = request.form['post']
         user_name = current_user.first_name
-        new_post = Post(title=title, content=content, user_id=current_user.id, user_name=user_name)
-        db.session.add(new_post)
-        db.session.commit()
+
+        if len(title) < 1:
+            flash('Title is too short!', category='error')
+
+        elif len(content) < 1:
+            flash('Post is too short!', category='error')
+
+        else:
+            new_post = Post(title=title, content=content, user_id=current_user.id, user_name=user_name)
+            db.session.add(new_post)
+            db.session.commit()
+            flash('Post submitted successfully!', category='success')
 
     posts = Post.query.all()
     return render_template('forum.html', posts=posts, user=current_user)
-
-""" if request.method == 'POST': 
-        submit_button = request.form.get('submit_button')
-
-        if submit_button == 'post_btn':
-            post = request.form.get('post')
-            title = request.form.get('title')
-
-            if len(post) < 1:
-                flash('Post is too short!', category='error') 
-            else:
-                new_post = Post(content=post, title=title, user_id=current_user.id)  #providing the schema for the post 
-                db.session.add(new_post) #adding the post to the database 
-                db.session.commit()
-                flash('Post added!', category='success')
-
-        elif submit_button == 'comment_btn':
-            comment = request.form.get('comment')
-            post_id = Post.id
-
-            if len(comment) < 1:
-                flash('Comment is too short!', category='error') 
-            else:
-                new_comment = Comment(content=comment, user_id=current_user.id, post_id=post_id)  #providing the schema for the post 
-                db.session.add(new_comment) #adding the comment to the database 
-                db.session.commit()
-                flash('Comment added!', category='success')
-
-    return render_template('forum.html', user=current_user)"""
 
 
 @views.route('/post/<int:post_id>/comment', methods=['POST'])
@@ -89,10 +69,15 @@ def forum():
 def create_comment(post_id):
     print("Post ID:" + str(post_id)) #check post_id working
     comment_content = request.form['comment']
-    user_name = current_user.first_name
-    new_comment = Comment(content=comment_content, post_id=post_id, user_name=user_name) #providing the schema for the post
-    db.session.add(new_comment)
-    db.session.commit()
+
+    if len(comment_content) < 1:
+        flash('Comment is too short!', category='error')
+    else:
+        user_name = current_user.first_name
+        new_comment = Comment(content=comment_content, post_id=post_id, user_name=user_name) #providing the schema for the post
+        db.session.add(new_comment)
+        db.session.commit()
+        flash('Comment added to post!', category='success')
 
     return redirect('/forum')
 
