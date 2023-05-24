@@ -1,5 +1,5 @@
 from . import db
-from flask_login import UserMixin, current_user
+from flask_login import UserMixin
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 
@@ -30,4 +30,4 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     #posts = db.relationship('Post')
-    #posts = db.relationship('Comment')
+    #comments = db.relationship('Comment')
