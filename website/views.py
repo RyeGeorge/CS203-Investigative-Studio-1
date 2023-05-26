@@ -1,7 +1,9 @@
-from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, send_file
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, send_file, session
 from flask_login import login_required, current_user
 from .models import Post, User, Comment
 from . import db
+from werkzeug.utils import secure_filename
+
 
 views = Blueprint('views', __name__)
 
@@ -81,11 +83,26 @@ def create_comment(post_id):
 
     return redirect('/forum')
 
-@views.route('/profile')
+@views.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
+    if 'num_posts' not in session:
+        session['num_posts'] = 5
+
     posts = Post.query.all()
-    return render_template('profile.html', user=current_user, posts=posts)
+
+    if request.method == 'POST':
+        num_posts = session['num_posts']
+        num_posts += 5
+        session['num_posts'] = num_posts
+        return redirect('/profile')
+
+    if request.referrer and request.referrer != request.url:
+        session['num_posts'] = 5
+
+    return render_template('profile.html', user=current_user, posts=posts, num_posts=session['num_posts'])
+
+    
 
 @views.route('/game', methods=['GET', 'POST'])
 @login_required

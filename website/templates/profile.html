@@ -41,24 +41,32 @@
     </li> 
 </div>
 
-<div class="contianer ">
-    {% for post in posts %}
+<div class="container">
+    {% for post in posts | reverse %}
         {% if post.user_id == user.id %}
-        <li class="list-group-item posts">
-            <a href="">{{post.title}}</a>
-            <p>
-                <!--If post has more than 100 charcters display only the first 100 characters of the post-->
-                {% if post.content | length > 100 %}
-                {{ post.content[:100] | safe}}...
-                {% else %}
-                {{ post.content }}
-                {% endif %}
-            </p>
-            <span class="badge badge-pill badge-secondary">{{post.created}}</span>   
-        </li>
+            {% if loop.index <= num_posts %}
+                <li class="list-group-item posts">
+                    <a href="">{{ post.title }}</a>
+                    <p>
+                        <!-- If post has more than 100 characters, display only the first 100 characters of the post -->
+                        {% if post.content | length > 100 %}
+                            {{ post.content[:100] | safe }}...
+                        {% else %}
+                            {{ post.content }}
+                        {% endif %}
+                    </p>
+                    <span class="badge badge-pill badge-secondary">{{ post.created }}</span>   
+                </li>
+            {% endif %}
         {% endif %}
     {% endfor %}
-    
+
+    {% if posts|length >= num_posts %}
+    <form method="post">
+        <button class="btn-primary">Load More</button>
+    </form>
+    {% endif %}
+
 </div>
 
 {% endblock %}
