@@ -1,0 +1,72 @@
+{% extends "base.html" %} {% block title %}Profile{% endblock %} 
+
+
+
+{% block head %}
+
+<style>
+    .posts {
+        margin-top: 10px;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+
+    <li class="list-group-item"> 
+        <p class="text-left"> 
+          <span class="badge badge-pill badge-primary">First Name</span> 
+        </p> 
+        <p class="text-left">{{user.first_name}}</p> 
+
+        <p class="text-left"> 
+            <span class="badge badge-pill badge-primary">Email</span> 
+        </p> 
+        <p class="text-left">
+            {{user.email}}
+            <a href="/update-email">Update</a>
+        </p> 
+
+        <p class="text-left"> 
+            <span class="badge badge-pill badge-primary">Password</span> 
+        </p> 
+        <p class="text-left">      
+            {{user.password}}
+            <a href="/update-password">Update</a>
+        </p> 
+    </li> 
+</div>
+
+<div class="container">
+    {% for post in posts | reverse %}
+        {% if post.user_id == user.id %}
+            {% if loop.index <= num_posts %}
+                <li class="list-group-item posts">
+                    <a href="">{{ post.title }}</a>
+                    <p>
+                        <!-- If post has more than 100 characters, display only the first 100 characters of the post -->
+                        {% if post.content | length > 100 %}
+                            {{ post.content[:100] | safe }}...
+                        {% else %}
+                            {{ post.content }}
+                        {% endif %}
+                    </p>
+                    <span class="badge badge-pill badge-secondary">{{ post.created }}</span>   
+                </li>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    {% if posts|length >= num_posts %}
+    <form method="post">
+        <button class="btn-primary">Load More</button>
+    </form>
+    {% endif %}
+
+</div>
+
+{% endblock %}
