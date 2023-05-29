@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, send_file, session
+from flask import Blueprint, render_template, request, flash, redirect, request, url_for, send_file, session
 from flask_login import login_required, current_user
 from .models import Post, User, Comment
 from . import db
@@ -32,6 +32,7 @@ def home():
     else:
         return render_template("home.html", user=current_user)
 
+
     
 @views.route('/download')
 @login_required
@@ -40,13 +41,24 @@ def download():
     return send_file(path, as_attachment=True) # download the file
 
 
+
 @views.route('/forum', methods=['GET', 'POST'])
 @login_required
 def forum():
     print("Current user" + str(current_user)) #check if current user working
+    posts = Post.query.all()
 
+    return render_template('forum.html', posts=posts, user=current_user)
+
+
+
+#Route to create a post
+@views.route('/create_post', methods=['POST'])
+@login_required
+def create_post():
     if request.method == 'POST':
         title = request.form['title']
+        sub_title = request.form['sub-title']
         content = request.form['post']
         user_name = current_user.first_name
 
@@ -56,16 +68,19 @@ def forum():
         elif len(content) < 1:
             flash('Post is too short!', category='error')
 
+        elif len(sub_title) < 1:
+            flash('Sub-Title is too short!', category='error')
+
         else:
-            new_post = Post(title=title, content=content, user_id=current_user.id, user_name=user_name)
+            new_post = Post(title=title, sub_title=sub_title, content=content, user_id=current_user.id, user_name=user_name)
             db.session.add(new_post)
             db.session.commit()
             flash('Post submitted successfully!', category='success')
-
-    posts = Post.query.all()
-    return render_template('forum.html', posts=posts, user=current_user)
+    return redirect('forum')
 
 
+
+#Route to add comment to a post
 @views.route('/post/<int:post_id>/comment', methods=['POST'])
 @login_required
 def create_comment(post_id):
@@ -81,7 +96,21 @@ def create_comment(post_id):
         db.session.commit()
         flash('Comment added to post!', category='success')
 
-    return redirect('/forum')
+    return redirect(request.referrer) #effectively refreshes current page
+
+
+#Route to display selected post on post.html
+@views.route('/post/<int:post_id>')
+@login_required
+def view_post(post_id):
+    post = Post.query.get(post_id)
+    if post:
+        return render_template('/post.html', post=post, user=current_user)
+    else:
+        flash('Post not found', category='error')
+        return redirect(url_for('forum'))
+
+
 
 @views.route('/profile', methods=['GET', 'POST'])
 @login_required

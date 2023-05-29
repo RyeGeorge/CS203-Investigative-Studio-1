@@ -18,6 +18,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     created = db.Column(db.DateTime(timezone=True), default=func.now())
     title= db.Column(db.String(100))
+    sub_title= db.Column(db.String(1000))
     content= db.Column(db.String(10000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = relationship('User', backref='posts')
