@@ -1,97 +1,11 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} 
 
 
-
-{% block head %}
-
-<style>
-
-
-#home-btn {
-  margin: 10px;
-}
-
-
-.bg-container {
-  height: 640px;
-  z-index: 100;
-  overflow: hidden;
-  flex-direction: column;
-}
-
-.main-header {
-  color: whitesmoke;
-
-  position: absolute;
-  bottom: 60%;
-  left: 50%;
-  transform: translateX(-50%);
-  transform: translateZ(50%)
-}
-
-.sub-section {
-  margin-top: 50px;
-  height: 640px;
-  width: 100%;
-}
-
-.section {
-  margin-top: 100px;
-}
-
-body{
-  background-color: #33323d;
-  
-}
-
-h1{
-  font-size: 52px;
-  color: whitesmoke;
-}
-
-h2{
-  font-size: 48px;
-  color: whitesmoke;
-}
-
-p{
-  font-size: 24px;
-  color: whitesmoke;
-}
-
-
-.btn-container{
-  position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  transform: translateZ(50%)
-}
-
-#about {
-  margin-top: 50px;
-}
-
-@media (min-aspect-ratio: 16/9) {
-  #backgroundVideo {
-    width: 100%;
-    height: auto;
-  }
-}
-@media (max-aspect-ratio: 16/9) {
-  #backgroundVideo {
-    width: auto;
-    height: 100%;
-  }
-}
-
-</style>
-
-{% endblock %}
-
 {% block background %}
 
 <div class="bg-container d-flex justify-content-center align-items-center">
+
+<div class="video-overlay"></div>
 
   <h1 class="main-header">Play The Game!</h1>
 
@@ -106,77 +20,30 @@ p{
 </div>
 
 
+<div class="section1">
+  <div class="container">
+    <h1 class="text-center">About The Game</h1>
+
+<p>Blast and Dash is a fast-paced 2D platformer where you takes on the role of a pirate who has been stranded on a deserted island.  
+  You must use your various abilities to traverse the island and find the four torn map pieces in order to escape the island.
+  But it won’t be easy as there are many dangers on the island.  you must defeat their enemies and avoid the numerous traps in order to leave the island.
+</p>
+  </div>
+</div>
+
+<div class="section2">
+  <h1 class="text-center">About The Game</h1>
+
+<p>Blast and Dash is a fast-paced 2D platformer where you takes on the role of a pirate who has been stranded on a deserted island.  
+  You must use your various abilities to traverse the island and find the four torn map pieces in order to escape the island.
+  But it won’t be easy as there are many dangers on the island.  you must defeat their enemies and avoid the numerous traps in order to leave the island.
+</p>
+</div>
 
 {% endblock %}
 
 {% block content %}
 
-<div id="about" class="contianer">
-  <h1 class="text-center">About The Game</h1>
-
-  <p>Blast and Dash is a fast-paced 2D platformer where you takes on the role of a pirate who has been stranded on a deserted island.  
-    You must use your various abilities to traverse the island and find the four torn map pieces in order to escape the island.
-    But it won’t be easy as there are many dangers on the island.  you must defeat their enemies and avoid the numerous traps in order to leave the island.
-  </p>
-
-  <div class="section">
-    <h2 class="text-left">The Shotgun</h2>
-    <div class="sub-section">
-      <video autoplay muted loop id="backgroundVideo" src="/static/Shooting shotgun.mp4" type="video/mp4"></video>
-      <p>
-        The pirate's shotgun delivers devastating blows with its wide spray pattern, obliterating all enemies in your way.
-      </p>
-    </div>
-  
-    <div class="sub-section">
-      <video autoplay muted loop id="backgroundVideo" src="/static/Shotgun Jump.mp4" type="video/mp4"></video>
-      <p>
-        The shotgun doubles as a movement tool, launching the player through the air when fired during jumps, enabling swift traversal.
-      </p>
-    </div>
-  </div>
 
 
-  <div class="sub-section">
-    <h2 class="text-left">The Movement</h2>
-    <video autoplay muted loop id="backgroundVideo" src="/static/Wall jump and Wall Slide.mp4" type="video/mp4"></video>
-    <p>
-      The pirate skillfully slides down vertical walls, navigating hazards. A timed jump off walls grants acrobatic escapes and access to higher platforms.
-    </p>
-  </div>
-
-  <div class="sub-section">
-    <video autoplay muted loop id="backgroundVideo" src="/static/Dash.mp4" type="video/mp4"></video>
-    <p>
-      The pirate swiftly dashes through the island, evading enemies and obstacles with lightning-fast movements and unmatched agility.
-    </p>
-  </div>
-  
-
-  <div class="sub-section">
-    <h2 class="text-left">The Enemies</h2>
-    <video autoplay muted loop id="backgroundVideo" src="/static/Crab.mp4" type="video/mp4"></video>
-    <p>
-      The formidable crab scuttles across the island, its pincers poised to snap and its armored shell providing formidable defense against attacks.
-    </p>
-  </div>
-
-</div>
-
-<div class="sub-section">
-  <video autoplay muted loop id="backgroundVideo" src="/static/Starfish.mp4" type="video/mp4"></video>
-  <p>
-    The relentless starfish spins with dazzling speed, launching itself towards the player, its spiky arms ready to strike and impede their progress.
-  </p>
-</div>
-
-<div class="sub-section">
-  <video autoplay muted loop id="backgroundVideo" src="/static/Clam.mp4" type="video/mp4"></video>
-  <p>
-    The clam, nestled within its protective shell, skillfully launches projectile pearls at the player, unleashing a barrage of dangerous projectiles to hinder their advancement.
-  </p>
-</div>
-
-</div>
-  
 {% endblock %}
