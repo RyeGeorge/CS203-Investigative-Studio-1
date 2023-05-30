@@ -19,30 +19,126 @@
   <video autoplay muted loop id = "backgroundVideo" src="/static/Blast and Dash BG.mp4" type="video/mp4"></video>
 </div>
 
-
 <div class="section1">
-  <div class="container">
-    <h1 class="text-center">About The Game</h1>
 
-<p>Blast and Dash is a fast-paced 2D platformer where you takes on the role of a pirate who has been stranded on a deserted island.  
-  You must use your various abilities to traverse the island and find the four torn map pieces in order to escape the island.
-  But it won’t be easy as there are many dangers on the island.  you must defeat their enemies and avoid the numerous traps in order to leave the island.
-</p>
-  </div>
+  <div class="section1-overlay"></div>
+    <div class="content">
+      <div class="container">
+        <h1 class="text-center">About The Game</h1>
+    
+        <p>
+            Take on the role of a daring pirate, fighting through a deserted island as you piece together a map to escape.
+        </p>
+
+        <div class="video-container border border-3 border-dark">
+          <video autoplay muted loop id = "content-backgroundvideo" src="/static/Shooting shotgun.mp4" type="video/mp4"></video>
+        </div>
+      </div>
+    </div>
+
+    <div class="background-img"></div>
+
 </div>
 
 <div class="section2">
-  <h1 class="text-center">About The Game</h1>
+  <div class="container">
+    <div class="content">
+      <h1 class="text-center">The Shotgun</h1>
 
-<p>Blast and Dash is a fast-paced 2D platformer where you takes on the role of a pirate who has been stranded on a deserted island.  
-  You must use your various abilities to traverse the island and find the four torn map pieces in order to escape the island.
-  But it won’t be easy as there are many dangers on the island.  you must defeat their enemies and avoid the numerous traps in order to leave the island.
-</p>
+      <p>
+        Using your trusty shotgun, propel yourself through the air and vanquish foes with this versatile weapon of mobility and combat
+      </p>
+
+        <div class="image-container">
+
+          <div class="section2-img border border-light">
+            <video autoplay muted loop id = "content-backgroundvideo" src="/static/Shooting shotgun.mp4" type="video/mp4"></video>
+          </div>
+
+          <div class="section2-img border border-light">
+            <video autoplay muted loop id = "content-backgroundvideo" src="/static/Shotgun Jump.mp4" type="video/mp4"></video>
+          </div>
+
+        </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="section1">
+
+  <div class="section1-overlay"></div>
+    <div class="content">
+      <div class="container">
+        <h1 class="text-center">The Abilites</h1>
+    
+        <p>
+          Dash swiftly, slide and jump off walls! Unlock your potential, conquer challenges, and outmaneuver your enemies.
+        </p>
+
+        <div class="image-container">
+
+          <div class="section2-img border border-light">
+            <video autoplay muted loop id = "content-backgroundvideo" src="/static/Dash.mp4" type="video/mp4"></video>
+          </div>
+
+          <div class="section2-img border border-light">
+            <video autoplay muted loop id = "content-backgroundvideo" src="/static/Wall jump and Wall Slide.mp4" type="video/mp4"></video>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="background-img-2"></div>
+</div>
+
+<div class="section2">
+  <div class="container">
+    <div class="content">
+      <h1 class="text-center">The Enemies</h1>
+
+      <p>
+        Using your trusty shotgun, propel yourself through the air and vanquish foes with this versatile weapon of mobility and combat
+      </p>
+
+        <div class="image-container">
+
+          <div class="section2-img border border-light">
+            <video autoplay muted loop id = "content-backgroundvideo" src="/static/Crab.mp4" type="video/mp4"></video>
+          </div>
+
+          <div class="section2-img border border-light">
+            <video autoplay muted loop id = "content-backgroundvideo" src="/static/Starfish.mp4" type="video/mp4"></video>
+          </div>
+
+          <div class="section2-img border border-light">
+            <video autoplay muted loop id = "content-backgroundvideo" src="/static/Clam.mp4" type="video/mp4"></video>
+          </div>
+
+
+        </div>
+
+    </div>
+  </div>
 </div>
 
 {% endblock %}
 
 {% block content %}
 
+
+<script>
+window.addEventListener('scroll', function() {
+  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  var backgroundImgs = document.querySelectorAll('.background-img, .background-img-2');
+  backgroundImgs.forEach(function(backgroundImg) {
+    backgroundImg.style.transform = 'translateY(' + scrollTop / 2 + 'px)';
+  });
+});
+
+</script>
 
 {% endblock %}
