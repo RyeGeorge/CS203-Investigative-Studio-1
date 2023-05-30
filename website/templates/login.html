@@ -12,34 +12,13 @@
     top: 0px;
   }
 
-  #center-item {
-    display: inline;
-    float: none;
-  }
-
-  #mainBTN {
-    height: 1080px;
-    width: auto;
-  
-    margin:auto;
-  }
-
-  form {
-    align-content: center;
-    margin: auto;
-    width: 60%;
-  }  
-
 </style>
 {% endblock %}
 
-{% block background %}
-{% endblock %}
 
 {% block content %}
-<div>
-  <video autoplay muted loop id = "backgroundVideo" src="/static/Blast and Dash BG.mp4" type="video/mp4"></video>
-</div>
+<body>
+    <video autoplay muted loop id = "backgroundVideo" src="/static/Blast and Dash BG.mp4" type="video/mp4"></video>
     <form method="POST">
       <h3 class="text-light" align="center">Login</h3>
       <div class="form-group">
@@ -67,5 +46,6 @@
         <button type="submit" class="btn btn-primary">Login</button>
       </div>
     </form>
-
+  </div>
+</body>
 {% endblock %}
