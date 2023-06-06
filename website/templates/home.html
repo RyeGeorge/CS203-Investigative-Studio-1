@@ -3,13 +3,14 @@
 
 {% block background %}
 
-<div class="bg-container d-flex justify-content-center align-items-center">
+<div class="bg-container d-flex">
 
 <div class="video-overlay"></div>
 
-<img class="logo" src="/static/Blast and Dash logo.png" alt="Blast and Dash logo">
+<div class="bg-content">
 
-<h1 class="main-header">Embark on an Epic Pirate Adventure</h1>
+  <h1 class="main-header">Embark on an Epic Pirate Adventure</h1>
+
 
   <div class="d-flex btn-container">
     <a href="/game" id="home-btn" class="btn-primary btn-lg">Play Game</a>
@@ -17,6 +18,11 @@
     <a href="/download" id="home-btn" class="btn-primary btn-lg">Download</a>
 
   </div>
+
+</div>
+
+<img class="logo" src="/static/Blast and Dash logo.png" alt="Blast and Dash logo">
+
 
   <video autoplay muted loop id = "backgroundVideo" src="/static/Blast and Dash BG.mp4" type="video/mp4"></video>
 </div>
@@ -105,7 +111,7 @@
       <h1 class="text-center">The Enemies</h1>
 
       <p>
-        Using your trusty shotgun, propel yourself through the air and vanquish foes with this versatile weapon of mobility and combat
+        The sturdy crab, the spinning starfish, and the pearl-shooting clam, each pose a unique threat to your survival.
       </p>
     </div>
   </div>

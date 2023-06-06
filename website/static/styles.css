@@ -7,7 +7,6 @@ footer {
 
 
   /* HOME PAGE */
-
   
   .logo {
     position: absolute;
@@ -51,6 +50,11 @@ footer {
     width: 500px;
     margin: 50px;
   }
+
+  .section2-img video {
+    width: 100%;
+    height: 100%;
+  }
   
   .section1 {
     width: 100%;
@@ -67,11 +71,14 @@ footer {
   .background-img{
     background-image: url(Home-Background-Image.PNG);
     background-repeat: horizontal;
+    background-size: cover;
+    z-index: -5;
+
     width: 100%;
     height: 800px;
+
     position: absolute;
-    top: -70%;
-    z-index: -5;
+    top: -50%;
   }
 
   .background-img-2 {
@@ -126,6 +133,8 @@ footer {
 
   #backgroundVideo {
     z-index: -100;
+    width: 100%;
+    height: auto;
   }
 
   #content-backgroundvideo {
@@ -149,22 +158,29 @@ footer {
   
   .bg-container {
     position: relative;
-    height: 800px;
+    max-height: 800px;
     z-index: 100;
     overflow: hidden;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: auto;
+  }
+
+  .bg-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    position: absolute;
   }
   
   .main-header {
     color: whitesmoke;
-  
-    position: absolute;
-    bottom: 60%;
-    left: 50%;
-    transform: translateX(-50%);
-    transform: translateZ(50%)
   }
-  
   
   
   body{
@@ -187,25 +203,3 @@ footer {
     color: whitesmoke;
   }
   
-  
-  .btn-container{
-    position: absolute;
-    bottom: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    transform: translateZ(50%)
-  }
-  
-  
-  @media (min-aspect-ratio: 16/9) {
-    #backgroundVideo {
-      width: 100%;
-      height: auto;
-    }
-  }
-  @media (max-aspect-ratio: 16/9) {
-    #backgroundVideo {
-      width: auto;
-      height: 100%;
-    }
-  }
