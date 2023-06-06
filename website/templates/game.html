@@ -19,8 +19,14 @@
 
     <iframe  mozallowfullscreen="true" allow="autoplay; fullscreen" src="/static/Web Build/index.html" 
     style="border:0px #000000 none;" name="Pong: Star Wars Remix" scrolling="no" msallowfullscreen="true" allowfullscreen="true" 
-    webkitallowfullscreen="true" allowtransparency="true" frameborder="0" height="720px" width="1280px"></iframe>
+    webkitallowfullscreen="true" allowtransparency="true" frameborder="0" height="720px" width="1280px" onerror="reportError(event)"></iframe>
 
 </div>
+
+<script>
+    function reportError(event) {
+        console.error("Failed to load the game:", event.message);
+    }
+</script>
 
 {% endblock %}
