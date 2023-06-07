@@ -3,25 +3,25 @@
 {% block content %}  
  <body>
 
-  <h1 align="center">Forum</h1>  
+  <h1 class="text-center">Forum</h1>  
   <button id="scrollButton" class="btn btn-link">Create a Post</button>
 
-  <div class="list-group list-group-flush" id="posts">
+  <div class="my-1 bg-white list-group list-group-flush" id="posts">
     {% for post in posts %}
     <p class="list-group-item">
       <div class="row">
         <div class="col-md-9">
           <a href="{{ url_for('views.view_post', post_id=post.id) }}">
-            <h5>{{ post.title }}</h5>
+            <h5 class="pl-3">{{ post.title }}</h5>
           </a>
-          <small>  - written by {{ post.user_name }}</small>
+          <small class="p-3">  - written by {{ post.user_name }}</small>
         </div>
         <div class="col-md-3">
           <small>{{ post.created }}</small>
         </div>
       </div>
     </p>
-    <p class="list-group-item">
+    <p class="list-group-item text-black">
       {{ post.sub_title }}
     </p>
 
@@ -33,9 +33,8 @@
     <br />
     {% endfor %} 
   </div>
-  <br />
 
-  <h3 id="targetHeading" align="center">Create a Post</h3>
+  <h1 id="targetHeading" class="text-center mt-5">Create a Post</h1>
   <form method="POST" acion="{{ url_for('views.create_post') }}">
     <textarea placeholder="Title" name="title" id="title" class="form-control"></textarea>
     <textarea placeholder="Sub-title (What is your post about?)" name="sub-title" id="sub-title" class="form-control"></textarea>
