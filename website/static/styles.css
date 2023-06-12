@@ -85,7 +85,7 @@ footer {
     height: 800px;
 
     position: absolute;
-    top: -50%;
+    top: -70%;
   }
 
   .background-img-2 {
@@ -215,4 +215,8 @@ footer {
       font-size: 1.5rem;
     }
 
+  }
+
+  @media (max-width: 768px) {
+    
   }
