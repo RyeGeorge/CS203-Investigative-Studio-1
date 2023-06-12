@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, request,
 from flask_login import login_required, current_user
 from .models import Post, User, Comment
 from . import db
+from sqlalchemy.exc import SQLAlchemyError
 from werkzeug.utils import secure_filename
 
 
@@ -17,13 +18,14 @@ def home():
         print(f"User ID: {user.id}")
         print(f"Email: {user.email}")
         print(f"Name: {user.first_name}")
-        print("---")
+        print("---")"""
 
     # Print all data from the Post table
-    posts = Post.query.all()
+    """posts = Post.query.all()
     for post in posts:
         print(f"Post ID: {post.id}")
         print(f"Title: {post.title}")
+        print(f"Sub-title: {post.sub_title}")
         print(f"Content: {post.content}")
         print("---")"""
 
@@ -72,10 +74,17 @@ def create_post():
             flash('Sub-Title is too short!', category='error')
 
         else:
-            new_post = Post(title=title, sub_title=sub_title, content=content, user_id=current_user.id, user_name=user_name)
-            db.session.add(new_post)
-            db.session.commit()
-            flash('Post submitted successfully!', category='success')
+            try:
+                new_post = Post(title=title, sub_title=sub_title, content=content, user_id=current_user.id, user_name=user_name)
+                db.session.add(new_post)
+                db.session.commit()
+                print(f"Database commit successful!")
+                flash('Post submitted successfully!', category='success')
+            except SQLAlchemyError as e:
+                db.session.rollback()
+                print(f"Database commit failed", str(e))
+                flash('Post submission error!', category='error')
+
     return redirect('forum')
 
 
@@ -90,11 +99,17 @@ def create_comment(post_id):
     if len(comment_content) < 1:
         flash('Comment is too short!', category='error')
     else:
-        user_name = current_user.first_name
-        new_comment = Comment(content=comment_content, post_id=post_id, user_name=user_name) #providing the schema for the post
-        db.session.add(new_comment)
-        db.session.commit()
-        flash('Comment added to post!', category='success')
+        try:
+            user_name = current_user.first_name
+            new_comment = Comment(content=comment_content, post_id=post_id, user_name=user_name) #providing the schema for the post
+            db.session.add(new_comment)
+            db.session.commit()
+            print(f"Database commit successful!")
+            flash('Comment added to post!', category='success')
+        except SQLAlchemyError as e: 
+            db.session.rollback()
+            print(f"Database commit failed", str(e))
+            flash('Comment submission error!', category='error')
 
     return redirect(request.referrer) #effectively refreshes current page
 

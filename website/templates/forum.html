@@ -35,7 +35,7 @@
   </div>
 
   <h1 id="targetHeading" class="text-center mt-5">Create a Post</h1>
-  <form method="POST" acion="{{ url_for('views.create_post') }}">
+  <form method="POST" action="{{ url_for('views.create_post') }}">
     <textarea placeholder="Title" name="title" id="title" class="form-control"></textarea>
     <textarea placeholder="Sub-title (What is your post about?)" name="sub-title" id="sub-title" class="form-control"></textarea>
     <textarea placeholder="Post content" name="post" id="post" class="form-control"></textarea>
