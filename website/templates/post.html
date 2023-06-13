@@ -1,52 +1,53 @@
 {% extends "base.html" %}  {% block title %}Post{% endblock %}
 
 {% block content %}
-
-<ul class="list-group list-group-flush" id="post">
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col-md-9">
-          <h5>{{ post.title }}</h5>
-          <small>  - written by {{ post.user_name }}</small>
+<div class="container mt-3">
+  <ul class="list-group list-group-flush no-border" id="post">
+      <li class="list-group-item no-border">
+        <div class="row no-border">
+          <div class="col-md-9">
+            <h1>{{ post.title }}</h1>
+            <small>  - written by {{ post.user_name }}</small>
+          </div>
+          <div class="col-md-3">
+            <small>{{ post.created }}</small>
+          </div>
         </div>
-        <div class="col-md-3">
-          <small>{{ post.created }}</small>
+      </li>
+      <p class="list-group-item no-border">
+        {{ post.content }}
+      </p>
+      <li class="list-group-item no-border">
+        <h3 align="center">Comments</h3>
+          <ul class="list-group list-group-flush" id="comments">
+            {% for comment in post.comments %}
+              <div class="row">
+                <div class="col-md-4"></div>
+                <li class="col-md-5">
+                  <small>{{ comment.user_name }}: {{ comment.content }}</small>
+                </li>
+              </div>
+            {% endfor %}
+          </ul>
+      </li>
+
+      <div align="center">
+        <button id="toggleButton" class="btn btn-secondary toggleButton mt-2">Comment</button>
+        <div id="textAreaContainer" style="display: none;">
+          <div class="row mt-3">
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                <form method="POST" action="{{ url_for('views.create_comment', post_id=post.id) }}">
+                  <textarea name="comment" id="comment" rows="3" class="form-control textAreaContainer"></textarea>
+                  <button type="submit" name="submit_button" value="comment_btn" class="btn-sm mt-3">Submit</button>
+                </form>
+              </div>
+          </div>
         </div>
       </div>
-    </li>
-    <li class="list-group-item">
-      {{ post.content }}
-    </li>
-    <li class="list-group-item">
-      <h6 align="center">Comments</h6>
-        <ul class="list-group list-group-flush" id="comments">
-          {% for comment in post.comments %}
-            <div class="row">
-              <div class="col-md-4"></div>
-              <li class="col-md-5">
-                <small>{{ comment.user_name }}: {{ comment.content }}</small>
-              </li>
-            </div>
-          {% endfor %}
-        </ul>
-    </li>
-
-    <div align="center">
-      <button id="toggleButton" class="btn btn-secondary toggleButton">Comment</button>
-      <div id="textAreaContainer" style="display: none;">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-              <form method="POST" action="{{ url_for('views.create_comment', post_id=post.id) }}">
-                <textarea name="comment" id="comment" rows="3" class="form-control textAreaContainer"></textarea>
-                <button type="submit" name="submit_button" value="comment_btn" class="btn-sm">Submit</button>
-              </form>
-            </div>
-        </div>
-      </div>
-    </div>
-    <br />
-  </ul>
+      <br />
+    </ul>
+  </div>
 
   <script>
     // Function to toggle the textarea for each button

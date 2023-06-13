@@ -3,47 +3,53 @@
 {% block content %}  
  <body>
 
-  <h1 class="text-center">Forum</h1>  
-  <button id="scrollButton" class="btn btn-link">Create a Post</button>
+  <h1 class="text-center mt-3">Forum</h1>
+  <div class="container">
+    <button id="scrollButton" class="btn btn-link">Create a Post</button>
+  </div>  
 
-  <div class="my-1 bg-white list-group list-group-flush" id="posts">
+  <div class="container list-group list-group-flush" id="posts">
     {% for post in posts %}
-    <p class="list-group-item">
-      <div class="row">
-        <div class="col-md-9">
-          <a href="{{ url_for('views.view_post', post_id=post.id) }}">
-            <h5 class="pl-3">{{ post.title }}</h5>
-          </a>
-          <small class="p-3">  - written by {{ post.user_name }}</small>
+    <div class="bg-light bg-gradient">
+      <p class="list-group-item no-border">
+        <div class="row no-border">
+          <div class="col-md-9">
+            <a href="{{ url_for('views.view_post', post_id=post.id) }}">
+              <h5 class="pl-3">{{ post.title }}</h5>
+            </a>
+            <small class="p-3">  - written by {{ post.user_name }}</small>
+          </div>
+          <div class="col-md-3">
+            <small>{{ post.created }}</small>
+          </div>
         </div>
-        <div class="col-md-3">
-          <small>{{ post.created }}</small>
-        </div>
-      </div>
-    </p>
-    <p class="list-group-item text-black">
-      {{ post.sub_title }}
-    </p>
+      </p>
+      <p class="list-group-item text-black bg-light no-border">
+        {{ post.sub_title }}
+      </p>
 
-    <div align="center">
-      <a href="{{ url_for('views.view_post', post_id=post.id) }}">
-        <button class="btn btn-link">View Comments</button>
-      </a>
+      <div align="center" class="mb-3">
+        <a href="{{ url_for('views.view_post', post_id=post.id) }}">
+          <button class="btn btn-link">View Comments</button>
+        </a>
+      </div>
     </div>
     <br />
     {% endfor %} 
   </div>
 
   <h1 id="targetHeading" class="text-center mt-5">Create a Post</h1>
-  <form method="POST" action="{{ url_for('views.create_post') }}">
-    <textarea placeholder="Title" name="title" id="title" class="form-control"></textarea>
-    <textarea placeholder="Sub-title (What is your post about?)" name="sub-title" id="sub-title" class="form-control"></textarea>
-    <textarea placeholder="Post content" name="post" id="post" class="form-control"></textarea>
-    <br />
-    <div align="center">
-      <button type="submit" name="submit_button" value="post_btn" class="btn btn-primary">Add Post</button>
-    </div>
-  </form>
+  <div class="container">
+    <form method="POST" action="{{ url_for('views.create_post') }}">
+      <textarea placeholder="Title" name="title" id="title" class="form-control"></textarea>
+      <textarea placeholder="Sub-title (What is your post about?)" name="sub-title" id="sub-title" class="mt-2 form-control"></textarea>
+      <textarea placeholder="Post content" name="post" id="post" class="mt-2 form-control"></textarea>
+      <br />
+      <div align="center">
+        <button type="submit" name="submit_button" value="post_btn" class="btn btn-primary mb-3">Add Post</button>
+      </div>
+    </form>
+  </div>
 
   <script>
     //function to scroll to heading on button click 
