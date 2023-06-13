@@ -4,7 +4,11 @@ footer {
     width: 100%;
   }
 
+  .no-border {
+    border: none;
+  }
 
+  
   /* HOME PAGE */
   
   .logo {
