@@ -1,33 +1,40 @@
 {% extends 'base.html' %}  {% block title %}Forum{% endblock %}
 
 {% block content %}  
- <body>
+<style>
 
+</style>
+
+<body>
+  <div class="background-img-3"></div>
+<!--Page title and simple button to scroll to Create a Post heading-->
   <h1 class="text-center mt-3">Forum</h1>
   <div class="container">
-    <button id="scrollButton" class="btn btn-link">Create a Post</button>
+    <button id="scrollButton" class="btn btn-link text-white text-uppercase">Create a Post</button>
   </div>  
 
+<!--Display all posts-->
   <div class="container list-group list-group-flush" id="posts">
     {% for post in posts %}
-    <div class="bg-light bg-gradient">
+    <div class="bg-light border rounded">
       <p class="list-group-item no-border">
         <div class="row no-border">
           <div class="col-md-9">
+<!--Post title becomes button to redirect to post.html-->
             <a href="{{ url_for('views.view_post', post_id=post.id) }}">
               <h5 class="pl-3">{{ post.title }}</h5>
             </a>
             <small class="p-3">  - written by {{ post.user_name }}</small>
           </div>
           <div class="col-md-3">
-            <small>{{ post.created }}</small>
+            <small class="pl-3">{{ post.created }}</small>
           </div>
         </div>
       </p>
       <p class="list-group-item text-black bg-light no-border">
         {{ post.sub_title }}
       </p>
-
+<!--View comments button will redirect to post.html-->
       <div align="center" class="mb-3">
         <a href="{{ url_for('views.view_post', post_id=post.id) }}">
           <button class="btn btn-link">View Comments</button>
@@ -38,6 +45,7 @@
     {% endfor %} 
   </div>
 
+<!--Create post form-->
   <h1 id="targetHeading" class="text-center mt-5">Create a Post</h1>
   <div class="container">
     <form method="POST" action="{{ url_for('views.create_post') }}">
