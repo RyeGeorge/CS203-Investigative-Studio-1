@@ -1,52 +1,29 @@
 {% extends 'base.html' %}  {% block title %}Update Password{% endblock %}
 
+
+
 {% block content %}
-
-<form method="post">  
- 
-    <div class="form-group">  
- 
-        <label>Curent Email</label>  
- 
-        <input type="text" name="current_email"  
- 
-            placeholder="Current Email" class="form-control"  
- 
-        ></input>  
- 
-    </div>  
-
-    <div class="form-group">  
- 
-        <label>New Email</label>  
- 
-        <input type="text" name="new_email"  
- 
-            placeholder="New Email" class="form-control"  
- 
-        ></input>  
- 
-    </div>  
-
-
-    <div class="form-group">  
- 
-        <label>Password</label>  
- 
-        <input type="password" name="password"
- 
-            placeholder="Password" class="form-control"  
- 
-        ></input>  
- 
-    </div> 
-
-    <div class="form-group">  
- 
-        <button type="submit" class="btn btn-primary">Submit</button>  
- 
-    </div> 
- 
-</form>  
+<body>
+    <form method="post">
+        <div class="pt-3 form-group container">
+            <label class="text-white">Curent Email</label>
+            <input type="text" name="current_email" placeholder="Current Email" class="form-control"></input>
+        </div>
+            
+        <div class="form-group container">
+            <label class="text-white">New Email</label>
+            <input type="text" name="new_email" placeholder="New Email" class="form-control"></input>
+        </div>
+            
+        <div class="form-group container">
+            <label class="text-white">Password</label>
+            <input type="password" name="password" placeholder="Password" class="form-control"></input>
+        </div>
+            
+        <div class="form-group container">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</body>
 
 {% endblock %}

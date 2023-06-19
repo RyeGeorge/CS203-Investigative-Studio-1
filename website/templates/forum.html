@@ -1,12 +1,10 @@
 {% extends 'base.html' %}  {% block title %}Forum{% endblock %}
 
 {% block content %}  
-<style>
-
-</style>
-
 <body>
+<!--Background-->
   <div class="background-img-3"></div>
+
 <!--Page title and simple button to scroll to Create a Post heading-->
   <h1 class="text-center mt-3">Forum</h1>
   <div class="container">
@@ -20,7 +18,7 @@
       <p class="list-group-item no-border">
         <div class="row no-border">
           <div class="col-md-9">
-<!--Post title becomes button to redirect to post.html-->
+          <!--Post title becomes button to redirect to post.html-->
             <a href="{{ url_for('views.view_post', post_id=post.id) }}">
               <h5 class="pl-3">{{ post.title }}</h5>
             </a>
@@ -34,7 +32,7 @@
       <p class="list-group-item text-black bg-light no-border">
         {{ post.sub_title }}
       </p>
-<!--View comments button will redirect to post.html-->
+    <!--View comments button will redirect to post.html-->
       <div align="center" class="mb-3">
         <a href="{{ url_for('views.view_post', post_id=post.id) }}">
           <button class="btn btn-link">View Comments</button>

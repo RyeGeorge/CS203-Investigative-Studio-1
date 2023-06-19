@@ -21,12 +21,17 @@
       rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles.css') }}"
     />
 
+<!--block to change page titles-->
     <title>{% block title %} {% endblock %}</title>
 
+<!--block to add to header-->
     {% block head %} {% endblock %}
   </head>
 
+<!--Main body-->
   <body>
+
+<!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <button
         class="navbar-toggler"
@@ -51,7 +56,9 @@
         </div>
       </div>
     </nav>
+<!--Navbar-->
 
+<!--Flash messages-->
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages %} {% if category ==
     'error' %}
@@ -69,13 +76,16 @@
       </button>
     </div>
     {% endif %} {% endfor %} {% endif %} {% endwith %}
+<!--Flash messages-->
 
-    {% block background %} {% endblock %} <!--Block to change background on page if required-->
+<!--Block for background-->
+    {% block background %} {% endblock %}
 
-   {% block content %} {% endblock %} <!--Block for main page content-->
+<!--Block for main page content-->
+   {% block content %} {% endblock %} 
 
 <!-- Footer -->
-<footer class="text-center text-white mt-3" style="background: linear-gradient(to bottom, #bb9263, #db6930)">
+<footer class="text-center text-white mt-3">
   <!-- Section: Social media -->
   <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
     <!-- Left -->
@@ -183,6 +193,7 @@
     <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
   </div>
   <!-- Copyright -->
+  
 </footer>
 <!-- Footer -->
 
