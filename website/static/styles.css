@@ -1,14 +1,39 @@
+
 footer {
-    position: relative;
+    background: linear-gradient(to bottom, #bb9263, #db6930);
     bottom: 0;
-    width: 100%;
+    width: 100%;    
   }
 
-  .no-border {
+.no-border {
     border: none;
   }
 
+h1 {
+  font-size: 52px;
+  color: whitesmoke;
+}
   
+body {
+  background-color: #33323d;
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.background-img-3{
+  background-image: url(Home-Background-Image.PNG);
+  opacity: .5;
+  background-repeat: horizontal;
+  background-size: cover;
+  z-index: -5;
+  position: absolute;
+
+  width: 100%;
+  height: 800px;
+}
+
+
   /* HOME PAGE */
   
   .logo {
