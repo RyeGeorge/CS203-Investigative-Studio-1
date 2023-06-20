@@ -39,9 +39,11 @@
         </li> 
     </div>
 
+    <!-- Display all of the users posts -->
     <div class="container">
         {% for post in posts | reverse %}
             {% if post.user_id == user.id %}
+            <!-- Only display 5 posts until the user presses the load more button -->
                 {% if loop.index <= num_posts %}
                     <li class="list-group-item posts border rounded bg-light">
                         <a href="{{ url_for('views.view_post', post_id=post.id) }}">
