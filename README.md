@@ -1,6 +1,9 @@
 # CS203-Investigative-Studio-1
 Repo for the CS203 Investigative Studio 1 class at Yoobee
 
+To begin you will need to make a copy of this repo on your local computer.
+Once the copy has been made, run the 'main.py' file and open the port number: 127.0.0.1:5000 in your browser.
+
 # Application Summary
 This web application is the community hub for the Blast and Dash platformer game.
 
