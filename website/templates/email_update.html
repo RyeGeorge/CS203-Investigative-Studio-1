@@ -1,27 +1,47 @@
 {% extends 'base.html' %}  {% block title %}Update Password{% endblock %}
 
+{% block head %}
+
+<style>
+    .form-container {
+        height: 700px;
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+{% endblock %}
+
 {% block content %}
 <body>
-    <form method="post">
-        <div class="pt-3 form-group container">
-            <label class="text-white">Curent Email</label>
-            <input type="text" name="current_email" placeholder="Current Email" class="form-control"></input>
+    <div class="form-container">
+        <div class="container">
+            <h1 class="text-center">Update Email</h1>
+            <form method="post">
+                <div class="pt-3 form-group container">
+                    <label class="text-white">Curent Email</label>
+                    <input type="text" name="current_email" placeholder="Current Email" class="form-control"></input>
+                </div>
+                    
+                <div class="form-group container">
+                    <label class="text-white">New Email</label>
+                    <input type="text" name="new_email" placeholder="New Email" class="form-control"></input>
+                </div>
+                    
+                <div class="form-group container">
+                    <label class="text-white">Password</label>
+                    <input type="password" name="password" placeholder="Password" class="form-control"></input>
+                </div>
+                    
+                <div class="form-group container">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
         </div>
-            
-        <div class="form-group container">
-            <label class="text-white">New Email</label>
-            <input type="text" name="new_email" placeholder="New Email" class="form-control"></input>
-        </div>
-            
-        <div class="form-group container">
-            <label class="text-white">Password</label>
-            <input type="password" name="password" placeholder="Password" class="form-control"></input>
-        </div>
-            
-        <div class="form-group container">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
+    </div>
 </body>
 
 {% endblock %}
