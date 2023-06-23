@@ -133,7 +133,15 @@ def profile():
     if 'num_posts' not in session:
         session['num_posts'] = 5
 
-    posts = Post.query.all()
+    all_posts = Post.query.all()
+    posts = []
+
+    for post in all_posts:
+        if post.user_id == current_user.id:
+            posts.append(post)
+
+
+    
 
     if request.method == 'POST':
         num_posts = session['num_posts']

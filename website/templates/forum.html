@@ -1,60 +1,79 @@
 {% extends 'base.html' %}  {% block title %}Forum{% endblock %}
 
+{% block head %}
+
+<style>
+  .forum-container {
+    min-height: 650px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+</style>
+
+{% endblock %}
+
 {% block content %}  
 <body>
 <!--Background-->
   <div class="background-img-3"></div>
 
 <!--Page title and simple button to scroll to Create a Post heading-->
-  <h1 class="text-center mt-3">Forum</h1>
-  <div class="container">
-    <button id="scrollButton" class="btn btn-link text-white text-uppercase">Create a Post</button>
-  </div>  
+  <div class="forum-container">
+    <div class="container">
+      <h1 class="text-center mt-3">Forum</h1>
+      <div class="container">
+        <button id="scrollButton" class="btn btn-link text-white text-uppercase">Create a Post</button>
+      </div>  
 
-<!--Display all posts-->
-  <div class="container list-group list-group-flush" id="posts">
-    {% for post in posts %}
-    <div class="bg-light border rounded">
-      <p class="list-group-item no-border">
-        <div class="row no-border">
-          <div class="col-md-9">
-          <!--Post title becomes button to redirect to post.html-->
+    <!--Display all posts-->
+      <div class="container list-group list-group-flush" id="posts">
+        {% for post in posts %}
+        <div class="bg-light border rounded">
+          <p class="list-group-item no-border">
+            <div class="row no-border">
+              <div class="col-md-9">
+
+              <!--Post title becomes button to redirect to post.html-->
+                <a href="{{ url_for('views.view_post', post_id=post.id) }}">
+                  <h5 class="pl-3">{{ post.title }}</h5>
+                </a>
+                <small class="p-3">  - written by {{ post.user_name }}</small>
+              </div>
+              <div class="col-md-3">
+                <small class="pl-3">{{ post.created }}</small>
+              </div>
+            </div>
+          </p>
+          <p class="list-group-item text-black bg-light no-border">
+            {{ post.sub_title }}
+          </p>
+          
+        <!--View comments button will redirect to post.html-->
+          <div align="center" class="mb-3">
             <a href="{{ url_for('views.view_post', post_id=post.id) }}">
-              <h5 class="pl-3">{{ post.title }}</h5>
+              <button class="btn btn-link">View Comments</button>
             </a>
-            <small class="p-3">  - written by {{ post.user_name }}</small>
-          </div>
-          <div class="col-md-3">
-            <small class="pl-3">{{ post.created }}</small>
           </div>
         </div>
-      </p>
-      <p class="list-group-item text-black bg-light no-border">
-        {{ post.sub_title }}
-      </p>
-    <!--View comments button will redirect to post.html-->
-      <div align="center" class="mb-3">
-        <a href="{{ url_for('views.view_post', post_id=post.id) }}">
-          <button class="btn btn-link">View Comments</button>
-        </a>
+        <br />
+        {% endfor %} 
+      </div>
+    
+    <!--Create post form-->
+      <h1 id="targetHeading" class="text-center mt-5">Create a Post</h1>
+      <div class="container">
+        <form method="POST" action="{{ url_for('views.create_post') }}">
+          <textarea placeholder="Title" name="title" id="title" class="form-control"></textarea>
+          <textarea placeholder="Sub-title (What is your post about?)" name="sub-title" id="sub-title" class="mt-2 form-control"></textarea>
+          <textarea placeholder="Post content" name="post" id="post" class="mt-2 form-control"></textarea>
+          <br />
+          <div align="center">
+            <button type="submit" name="submit_button" value="post_btn" class="btn btn-primary mb-3">Add Post</button>
+          </div>
+        </form>
       </div>
     </div>
-    <br />
-    {% endfor %} 
-  </div>
-
-<!--Create post form-->
-  <h1 id="targetHeading" class="text-center mt-5">Create a Post</h1>
-  <div class="container">
-    <form method="POST" action="{{ url_for('views.create_post') }}">
-      <textarea placeholder="Title" name="title" id="title" class="form-control"></textarea>
-      <textarea placeholder="Sub-title (What is your post about?)" name="sub-title" id="sub-title" class="mt-2 form-control"></textarea>
-      <textarea placeholder="Post content" name="post" id="post" class="mt-2 form-control"></textarea>
-      <br />
-      <div align="center">
-        <button type="submit" name="submit_button" value="post_btn" class="btn btn-primary mb-3">Add Post</button>
-      </div>
-    </form>
   </div>
 
   <script>
