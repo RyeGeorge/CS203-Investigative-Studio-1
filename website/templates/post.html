@@ -6,13 +6,24 @@
   h1 {
     color: black;
   }
+
+  .post-container {
+    height: 750px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>
 
 {% endblock %}
 
 {% block content %}
-<div class="container mt-3">
-  <ul class="list-group list-group-flush no-border" id="post">
+<div class="post-container mt-3">
+  <div class="background-img-3"></div>
+  <div class="container">
+    <ul class="list-group list-group-flush no-border" id="post">
       <li class="list-group-item no-border">
         <div class="row no-border">
           <div class="col-md-9">
@@ -58,6 +69,7 @@
       <br />
     </ul>
   </div>
+</div>
 
   <script>
     // Function to toggle the textarea for each button
